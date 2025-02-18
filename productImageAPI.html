@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Image</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        var products = [];
+        var index = 0;
+        function GetProduct(index){
+            document.getElementById("productTitle").innerHTML = products[index].title;
+            document.getElementById("productImage").innerHTML = products[index].image;
+            index++;
+        }
+
+        function bodyLoad(){
+            fetch("http://fakestoreapi.com/products")
+            .then(response=> response.jason())
+            .then(data=>{
+                products = data;
+                GetProduct(0); 
+            })
+        }
+
+        var slideshow;
+        function PlayClick(){
+            slideshow = setInterval(GetProduct, 3000);
+            document.querySelector("#status").innerHTML = "Slide Show - Started";
+        }
+
+        function PauseClick(){
+            clearInterval(slideshow);
+            document.querySelector("#status").innerHTML = "Slide Show - Paused";
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyLoad()">
+    <div class="card p-3">
+        <div class="card-header text-center">
+            <p id="status"></p>
+            <p id="productTitle"></p>
+        </div>
+
+        <div class="card-body text-center">
+            <img id="productImage" width="80%" height="300">
+        </div>
+
+        <div class="card-footer text-center">
+            <button class="btn btn-success" onclick="PlayClick()">
+                <span class="bi bi-play"></span>
+            </button>
+
+            <button class="btn btn-danger" onclick="PauseClick()">
+                <span class="bi bi-pause"></span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
