@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Login</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        var userDetails = {
+            Email: 'mani@gmail.com',
+            Mobile: '9876543210',
+            Password: 'mani@13'
+        }
+
+        var userid = "";
+        function ContinueClick(){
+            userid = document.getElementById("txtUser").value;
+            if(userid == userDetails.Email){
+                document.getElementById("password").style.display = "block";
+                document.getElementById("userid").style.display = "none";
+            } else if(userid == userDetails.Mobile){
+                document.getElementById("password").style.display = "block";
+                document.getElementById("userid").style.display = "none";
+            } else {
+                document.getElementById("userError").innerHTML = "Please Enter valid Email or Mobile"
+            }
+        }
+
+        function ConfirmClick(){
+            var password = document.getElementById("txtPwd").value;
+            if(password == userDetails.Password){
+                document.write(`Login Success ${userid}`);
+            } else {
+                document.getElementById("pwdError").innerHTML = "Invalid Password";
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center" style="height: 600px;">
+        <div>
+            <h3>Amazon Signin</h3>
+            <div id="userid">
+                <label class="form-label">Sign in with Email or Mobile</label>
+                <div>
+                    <input type="text" id="txtUser" class="form-control">
+                    <div class="text-danger" id="userError"></div>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-warning w-100" onclick="ContinueClick()">
+                        Continue
+                    </button>
+                </div>
+            </div>
+            <div id="password" style="display: none;">
+                <label class="form-label">Your Password</label>
+                <div>
+                    <input type="password" id="txtPwd" class="form-control">
+                    <div class="text-danger" id="pwdError"></div>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-warning w-100" onclick="ConfirmClick()">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
